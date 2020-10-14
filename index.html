@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--suppress CommaExpressionJS -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>Lol</title>
+</head>
+
+<body>
+
+<div class="container" id="app">
+    <hr>
+    <h1 class="text-center" style="color: green">Basics</h1>
+    <hr>
+    <!--data:name:string-->
+    <h1>String: {{name}}</h1>
+    <!--Sum-->
+    <h1>Sum: {{10+50}}</h1>
+    <!--data:number:int-->
+    <h1>Number: {{number}}</h1>
+    <!--data:isOk:boolean-->
+    <h1>if: {{isOk?'hello':'no'}}</h1>
+    <!--methods:sayHello:return string-->
+    <h1>say: {{sayHello()}}</h1>
+    <!--data:string:string-->
+    <h1>function: {{string}}</h1>
+    <h1>function.reverse: {{string.split('').reverse().join('')}}</h1>
+    <!--data:url:string-->
+    <h1><a :href="url">Google [:href]</a></h1>
+    <!--data:url:string-->
+    <h1><a v-bind:href="url">Google [v-bind:href]</a></h1>
+    <!--data:link:html-->
+    <h1 v-html="link"></h1>
+    <hr>
+    <h1 class="text-center" style="color: green">Events</h1>
+    <hr>
+    <!--data:title:string + data:counter:int + @mouseover($event):methods:onOver-->
+    <h2 v-on:mouseover="onOver">{{title}} = {{counter}}</h2>
+    <!--v-on:click:methods:add(int, string, event)-->
+    <button class="btn btn-primary" type="button" v-on:click="add(5,'Увеличить на 5',$event)">Увеличить на 5</button>
+    <button class="btn btn-primary" type="button" v-on:click="add(10,'Увеличить на 10',$event)">Увеличить на 10</button>
+    <!--v-on:click == @click-->
+    <button class="btn btn-primary" type="button" v-on:click="counter--,title = 'Уменьшить на 1'">Уменьшить</button>
+    <button class="btn btn-primary" type="button" @click="counter--,title = 'Уменьшить на 1'">Уменьшить</button>
+    <!--v-on:click.prevent == @click($event.preventDefault)-->
+    <h2><a href="http://google.com" target="_blank" @click="google">Google</a></h2>
+    <h2><a href="http://google.com" target="_blank" v-on:click.prevent>Google</a></h2>
+    <!--v-on:mousemove-->
+    <h2 v-on:mousemove="handle">
+        X: {{x}} Y: {{y}} <span v-on:mousemove.stop="">Не изменять</span>
+    </h2>
+    <!--v-on:keyup.alt:methods:alertValue-->
+    <label>
+        <pre>v-on:keyup.alt:methods:alertValue</pre>
+        <input type="text" v-on:keyup.alt="alertValue">
+    </label>
+    <br>
+    <!--:value:data:string_input_value + @input:string_input_value = $event.target.value-->
+    <label>
+        <pre>value:data:string_input_value + @input:string_input_value = $event.target.value</pre>
+        <input v-bind:value="string_input_value" @input="string_input_value = $event.target.value" type="text">
+    </label>
+    <br>
+    <!--v-model:data:string_input_value-->
+    <label>
+        <pre>v-model:data:string_input_value</pre>
+        <input type="text" v-model="string_input_value">
+    </label>
+    <br>
+    <!--v-model.lazy:data:string_input_value-->
+    <label>
+        <pre>v-model.lazy:data:string_input_value</pre>
+        <input type="text" v-model.lazy="string_input_value">
+    </label>
+    <br>
+    <!-- data:string_input_value -->
+    <h2>Test:string_input_value = {{string_input_value}}</h2>
+    <br>
+    <!--v-bind:class:computed:getClass + @click:data:isActive = !isActive -->
+    <pre>v-bind:class:computed:getClass + @click:data:isActive = !isActive</pre>
+    <div v-bind:class="getClass" @click="isActive = !isActive" class="circle"></div>
+    <br>
+    <!-- v-bind:class:Array:class.red:data:color-->
+    <pre>v-bind:class:Array:class.red:data:color</pre>
+    <div v-bind:class="[{'red':isActive},string_color]" class="circle"></div>
+    <br>
+    <!-- v-model:data:string_color-->
+    <label>
+        <input type="text" v-model="string_color">
+    </label>
+    <br>
+    <!--v-bind:style:computed:circleClasses-->
+    <div v-bind:style="circleClasses" class="circle"></div>
+    <!--v-bind:style:Array:computed:circleClasses:object-->
+    <div v-bind:style="[circleClasses,{'width': height + 'px'}]" class="circle"></div>
+    <br>
+    <!--v-model:data:string_color_2-->
+    <label>
+        <input type="text" v-model="string_color_2">
+    </label>
+    <!--v-model:data:height-->
+    <label>
+        <input type="text" v-model="height">
+    </label>
+    <br>
+    <!--v-if:data:type-->
+    <template v-if="key_type==='a'">
+        <h2>A</h2>
+        <h2>123</h2>
+    </template>
+    <h2 v-else-if="key_type==='b'">B</h2>
+    <h2 v-else-if="key_type==='c'">C</h2>
+    <h2 v-else>Not match[a,b,c]</h2>
+    <label>
+        <input type="text" v-model="key_type">
+    </label>
+    <br>
+    <!--v-for:people-->
+    <pre>v-for:people</pre>
+    <ul class="list-group" style="width: 10em">
+        <li class="list-group-item" v-for="(item,index) of people">{{index+1}}. {{item.name}}</li>
+    </ul>
+    <br>
+    <!--v-for:(num in 4)-->
+    <pre>v-for:(num in 4)</pre>
+    <ol>
+        <li v-for="num in 4">{{num}}</li>
+    </ol>
+    <br>
+    <!--v-for:person-->
+    <pre>v-for:person</pre>
+    <ul>
+        <li v-for="(value,key,index) of persons">{{index+1}} {{key}}:{{value}}</li>
+    </ul>
+    <br>
+    <!--data:counter_2-->
+    <h2>Counter {{counter_2}}</h2>
+    <!--computed:result-->
+    <h3>{{result}}</h3>
+    <div aria-label="Button group" class="btn-group" role="group">
+        <button @click="Add" class="btn btn-primary" type="button">Add</button>
+        <button @click="Sub" class="btn btn-primary" type="button">Sub</button>
+    </div>
+    
+    <h2 ref="heading">{{title_2}}</h2>
+    <button @click="update" class="btn btn-primary" type="button">Update</button>
+
+    <hr>
+</div>
+<div id="app2">
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
