@@ -67,7 +67,6 @@ const vue1 = new Vue({
         }
     },
     methods: {
-
         sayHello: function () {
             return 'Hello'
         },
@@ -93,13 +92,6 @@ const vue1 = new Vue({
         alertValue: function (event) {
             alert(event.target.value)
         },
-
-        Add: function () {
-            this.counter_2++;
-        },
-        Sub: function () {
-            this.counter_2--;
-        },
         update: function () {
             this.title_2 = 'updated';
             this.$refs.heading.style.color = "red";
@@ -108,8 +100,6 @@ const vue1 = new Vue({
         // changeName: function (event) {
         //     this.name = event.target.value
         // },
-
-
     }
 });
 vue1.$mount('#app')

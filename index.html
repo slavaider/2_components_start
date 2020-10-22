@@ -124,7 +124,7 @@
     <!--v-for:people-->
     <pre>v-for:people</pre>
     <ul class="list-group" style="width: 10em">
-        <li class="list-group-item" v-for="(item,index) of people">{{index+1}}. {{item.name}}</li>
+        <li class="list-group-item" v-for="(item,index) in people">{{index+1}}. {{item.name}}</li>
     </ul>
     <br>
     <!--v-for:(num in 4)-->
@@ -136,7 +136,7 @@
     <!--v-for:person-->
     <pre>v-for:person</pre>
     <ul>
-        <li v-for="(value,key,index) of persons">{{index+1}} {{key}}:{{value}}</li>
+        <li v-for="(value,key,index) in persons">{{index+1}} {{key}}:{{value}}</li>
     </ul>
     <br>
     <!--data:counter_2-->
@@ -144,10 +144,10 @@
     <!--computed:result-->
     <h3>{{result}}</h3>
     <div aria-label="Button group" class="btn-group" role="group">
-        <button @click="Add" class="btn btn-primary" type="button">Add</button>
-        <button @click="Sub" class="btn btn-primary" type="button">Sub</button>
+        <button @click="counter_2++" class="btn btn-primary" type="button">Add</button>
+        <button @click="counter_2--" class="btn btn-primary" type="button">Sub</button>
     </div>
-    
+
     <h2 ref="heading">{{title_2}}</h2>
     <button @click="update" class="btn btn-primary" type="button">Update</button>
 
